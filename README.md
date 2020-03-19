@@ -20,6 +20,6 @@ Install dependencies
 
 WAF page will default the url index to 0 but otherwise will be dependant on the number provided in the url
 
-Navigate to `http://localhost:8001/1` to see WAF index 1, `http://localhost:8001/2` to see WAG index 2
+Navigate to `http://localhost:8001/1` to see WAF index 1, `http://localhost:8001/2` to see WAF index 2, etc
 
 The url index generates a uniquely repeatable guid so that the harvest source will be harvested.

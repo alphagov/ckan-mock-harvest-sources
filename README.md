@@ -23,3 +23,7 @@ WAF page will default the url index to 0 but otherwise will be dependant on the 
 Navigate to `http://localhost:8001/1` to see WAF index 1, `http://localhost:8001/2` to see WAF index 2, etc
 
 The url index generates a uniquely repeatable guid so that the harvest source will be harvested.
+
+### Targeting the harvest source from a [docker-ckan](https://github.com/alphagov/docker-ckan) stack
+
+In order to target the fake harvest source use this URL - http://docker.for.mac.localhost:8001/<index number 0 - 99>

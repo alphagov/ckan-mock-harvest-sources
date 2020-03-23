@@ -32,7 +32,7 @@ def catch_all(path):
         content = '<html><body>{url_index}{links}</body></html>'
         links = ''
         for i in range(1, 11):
-            links += '<div><a href="/{url_index}/test.{index}.tmp.xml">Harvest source {index}</a></div>'.format(
+            links += '<div><a href="test.{index}.tmp.xml">Harvest source {index}</a></div>'.format(
                 url_index=url_index, index=i)
         content = content.format(url_index=url_index, links=links)
 

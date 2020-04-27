@@ -26,4 +26,4 @@ The url index generates a uniquely repeatable guid so that the harvest source wi
 
 ### Targeting the harvest source from a [docker-ckan](https://github.com/alphagov/docker-ckan) stack
 
-In order to target the fake harvest source use this URL - http://docker.for.mac.localhost:8001/<index number 0 - 99>
+In order to target the fake harvest source use this URL - http://docker.for.mac.localhost:8001/<index number 0 - 99>/

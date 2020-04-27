@@ -20,7 +20,16 @@ Install dependencies
 
 WAF page will default the url index to 0 but otherwise will be dependant on the number provided in the url
 
-Navigate to `http://localhost:8001/1/` to see WAF index 1, `http://localhost:8001/2/` to see WAF index 2, etc
+
+Navigate to `http://localhost:8001/1/` to see WAF index 1, `http://localhost:8001/2/` to see WAF index 2, etc up to 10
+
+Navigate to `http://localhost:8001/1/?limit=50` to define the number of links up to 99.
+
+    http://localhost:8001/1/?limit=20/ will generate 20 links, omitting the limit will generate 10
+
+Navigate to `http://localhost:8001/1/?delay=5` to define the delay on the server.
+
+    http://localhost:8001/1/?delay=5 will delay the server by 5 seconds, omitting the delay will delay the processing by 1 second
 
 The url index generates a uniquely repeatable guid so that the harvest source will be harvested.
 

@@ -1,4 +1,15 @@
-{ stdenv, symlinkJoin, writeText, makeWrapper, nginx, sitesDir, logDir, runDir, responsesDir}:
+{ stdenv
+, symlinkJoin
+, writeText
+, makeWrapper
+, nginx
+, sitesDir
+, logDir
+, runDir
+, responsesDir
+, thirdPartyDir
+, varsConf
+}:
 
 symlinkJoin {
   name = "rehomed-nginx";
@@ -8,7 +19,7 @@ symlinkJoin {
   nginxConf = writeText "nginx.conf" ''
     worker_processes  1;
 
-    error_log  ${logDir}/error.log debug;
+    error_log  ${logDir}/error.log info;
     pid        ${runDir}/nginx.pid;
 
     events {
@@ -16,7 +27,11 @@ symlinkJoin {
     }
 
     http {
+        # abusing `map` here because `set` is not allowed in this context
         map $host $mock_ckan_responses_root { default ${responsesDir}; }
+        map $host $mock_third_party_root { default ${thirdPartyDir}; }
+        include ${varsConf};
+
         include       mime.types;
         default_type  application/octet-stream;
 
@@ -45,7 +60,7 @@ symlinkJoin {
     rm $out/conf/nginx.conf
     ln -s $nginxConf $out/conf/nginx.conf
     wrapProgram $out/bin/nginx \
-      --run "mkdir -p ${sitesDir} ${logDir} ${runDir} ${responsesDir}" \
+      --run "mkdir -p ${sitesDir} ${logDir} ${runDir} ${thirdPartyDir} ${responsesDir}" \
       --add-flags "-c $out/conf/nginx.conf"
   '';
 }

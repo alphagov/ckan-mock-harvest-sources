@@ -18,6 +18,8 @@ in (with args; {
           logDir = (toString (./.)) + "/nix-var/logs";
           runDir = (toString (./.)) + "/nix-var/run";
           responsesDir = (toString (./.)) + "/responses";
+          thirdPartyDir = (toString (./.)) + "/mock-third-party";
+          varsConf = (toString (./.)) + "/vars.conf";
         })
       ];
 

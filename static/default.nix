@@ -21,6 +21,7 @@ in (with args; {
           thirdPartyDir = (toString (./.)) + "/mock-third-party";
           varsConf = (toString (./.)) + "/vars.conf";
         })
+        pkgs.cloudfoundry-cli
       ];
 
       # if we don't have this, we get unicode troubles in a --pure nix-shell

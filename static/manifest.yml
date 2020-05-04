@@ -1,0 +1,9 @@
+---
+applications:
+- name: ckan-static-mock-harvest-source
+  memory: 192M
+  instances: 1
+  health-check-type: http
+  health-check-http-endpoint: /status
+  docker:
+    image: risicle/ckan-static-mock-harvest-source:0.0.4

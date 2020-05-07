@@ -25,4 +25,13 @@ The server can be run in two ways:
  - For easy development a user with a working Nix installation should just be able
    to run `nix-shell . --pure --run "nginx"` to start an nginx daemon running
    locally.
- - A `Dockerfile` is also provided for more permanent deployments.
+ - A `Dockerfile` is also provided. This can be used to build an image suitable for
+   use in cloudfoundry (see the included `manifest.yml`) or used to run the server
+   locally. The resulting docker image will listen on port 80 by default and can be
+   started locally with a command such as `docker run -p 127.0.0.1:11088:80 <docker-image>`,
+   which would expose the server on local port 11088.
+
+Connecting to a locally-running mock harvest source from a dockerized ckan instance will
+require use of the `host.docker.internal` hostname, which should also be reflected in the
+`$mock_absolute_root_url` setting to allow self-references to work. Note this still won't
+work perfectly until full integration with the docker-compose environment is done.

@@ -147,6 +147,10 @@
         "url": "<!--#echo var="mock_absolute_root_url" -->mock-third-party/example-dataset-1/about",
         "notes": "This is an example CKAN dataset consisting of a number of active resources.",
         "owner_org": "9f3af52d-7a2e-4962-95c7-15a23b6e0b82",
+        "author": "Nobody",
+        "author_email": "nobody@example.com",
+        "maintainer": "Nobody",
+        "maintainer_email": "nobody@example.com",
         "extras": [
           {
             "key": "taxonomy_url",

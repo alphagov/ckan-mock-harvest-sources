@@ -4,6 +4,7 @@ from flask import request, Flask, Response
 app = Flask(__name__)
 DELAY_TAG = 'delay-'
 NUM_LINKS_TAG = 'num_links-'
+NUM_DIGITS=3
 
 
 @app.route('/', defaults={'path': '0'})
@@ -38,11 +39,11 @@ def catch_all(path):
             delay = int(path_split[2][len(DELAY_TAG):])
 
         filename = '.'.join([filename_parts[-4], filename_parts[-2], filename_parts[-1]])
-        _id = filename_parts[-3].zfill(2)
+        _id = filename_parts[-3].zfill(NUM_DIGITS)
 
         with open(filename, 'rb') as f:
             content = f.read().decode('utf-8')
-            content = content.replace('{{url-index}}', url_index.zfill(2))
+            content = content.replace('{{url-index}}', url_index.zfill(NUM_DIGITS))
             content = content.replace('{{end-guid}}', _id)
 
             # delay to simulate slow servers
@@ -52,14 +53,17 @@ def catch_all(path):
             resp = Response(content)
             resp.headers['Content-type'] = 'text/xml'
 
-            return resp
+            if filename_parts[-3] == '10':
+                return 'Error', 400
+            else:
+                return resp
     else:
         delay = 1
         num_links = 10
         if path_split[1].startswith(NUM_LINKS_TAG):
             num_links = int(path_split[1][len(NUM_LINKS_TAG):])
 
-        num_links = num_links if num_links < 100 else 99
+        num_links = num_links if num_links < 1000 else 999
         links = ''
         for index in range(1, 1 + num_links):
             links += f'<div><a href="test.{index}.tmp.xml">Harvest source {index}</a></div>'

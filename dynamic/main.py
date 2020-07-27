@@ -77,4 +77,4 @@ def catch_all(path):
 
 
 if __name__ == "__main__":
-    app.run(debug=os.getenv("DEBUG", False), host='0.0.0.0', port=int(os.getenv("PORT", 8001)))
+    app.run(debug='DEBUG' in os.environ, host='0.0.0.0', port=int(os.getenv("PORT", 8001)))

@@ -1,3 +1,4 @@
+import os
 import time
 from flask import request, Flask, Response
 
@@ -10,6 +11,9 @@ NUM_DIGITS=3
 @app.route('/', defaults={'path': '0'})
 @app.route('/<path:path>')
 def catch_all(path):
+    if path == 'healthcheck':
+        return 'OK', 200
+
     if not path.endswith('.tmp.xml') and not path.endswith('/'):
         return '''
             URL needs to end with /<br><br>
@@ -73,4 +77,4 @@ def catch_all(path):
 
 
 if __name__ == "__main__":
-    app.run(debug=True, host='0.0.0.0', port=8001)
+    app.run(debug='DEBUG' in os.environ, host='0.0.0.0', port=int(os.getenv("PORT", 8001)))

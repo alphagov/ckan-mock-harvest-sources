@@ -6,4 +6,4 @@ applications:
   health-check-type: http
   health-check-http-endpoint: /status
   docker:
-    image: govuk/ckan-static-mock-harvest-source:0.0.4
+    image: govuk/ckan-static-mock-harvest-source:0.0.5

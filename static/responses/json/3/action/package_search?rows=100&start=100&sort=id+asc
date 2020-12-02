@@ -1,0 +1,11 @@
+{
+  "help": "<!--#echo var="mock_absolute_root_url" -->api/3/action/help_show?name=package_search",
+  "success": true,
+  "result": {
+    "count": 1,
+    "sort": "id asc",
+    "facets": {},
+    "results": [],
+    "search_facets": {}
+  }
+}

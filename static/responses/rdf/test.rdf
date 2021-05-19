@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+        xmlns:foaf="http://xmlns.com/foaf/0.1/"
+        xmlns:void="http://www.w3.org/TR/void/"
+        xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+        xmlns:dcat="http://www.w3.org/ns/dcat#"
+        xmlns:dct="http://purl.org/dc/terms/"
+        xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+    <dcat:Catalog rdf:about="https://dsp-test.eametadata.com/geonetwork/catalogs/4b4971e0-f861-4e9e-96b6-f2a3bda98941">
+        <dct:title xml:lang="en">DSP TEST External Catalogue</dct:title>
+        <dct:description/>
+        <rdfs:label xml:lang="en">DSP TEST External Catalogue (DEFRA)
+        </rdfs:label>
+        <foaf:homepage/>
+        <void:openSearchDescription>eng/portal.opensearch</void:openSearchDescription>
+        <void:uriLookupEndpoint>eng/rdf.search?any=</void:uriLookupEndpoint>
+        <dct:publisher rdf:resource="https://dsp-test.eametadata.com/geonetwork/organizations/DEFRA"/>
+        <dct:language>eng</dct:language>
+        <dcat:dataset rdf:resource="https://dsp-test.eametadata.com/geonetwork/datasets/a5df0b0f-90a9-4d46-8ede-38d6802c2eae_resource"/>
+        <dcat:record rdf:resource="https://dsp-test.eametadata.com/geonetwork/records/a5df0b0f-90a9-4d46-8ede-38d6802c2eae"/>
+    </dcat:Catalog>
+    <foaf:Organization rdf:about="https://dsp-test.eametadata.com/geonetwork/organizations/DEFRA">
+        <foaf:name>DEFRA</foaf:name>
+    </foaf:Organization>
+    <dcat:CatalogRecord rdf:about="https://dsp-test.eametadata.com/geonetwork/records/a5df0b0f-90a9-4d46-8ede-38d6802c2eae">
+        <foaf:primaryTopic rdf:resource="https://dsp-test.eametadata.com/geonetwork/resources/a5df0b0f-90a9-4d46-8ede-38d6802c2eae_resource"/>
+        <dct:issued/>
+        <dct:modified/>
+        <dct:references>
+            <rdf:Description rdf:about="https://dsp-test.eametadata.com/geonetwork/records/a5df0b0f-90a9-4d46-8ede-38d6802c2eae/formatters/xml">
+                <dct:format>
+                <dct:IMT>
+                    <rdf:value>application/xml</rdf:value>
+                    <rdfs:label>XML</rdfs:label>
+                </dct:IMT>
+                </dct:format>
+            </rdf:Description>
+        </dct:references>
+        <dct:references>
+            <rdf:Description rdf:about="https://dsp-test.eametadata.com/geonetwork/records/a5df0b0f-90a9-4d46-8ede-38d6802c2eae">
+                <dct:format>
+                <dct:IMT>
+                    <rdf:value>text/html</rdf:value>
+                    <rdfs:label>HTML</rdfs:label>
+                </dct:IMT>
+                </dct:format>
+            </rdf:Description>
+        </dct:references>
+    </dcat:CatalogRecord>
+    <dcat:Dataset rdf:about="https://dsp-test.eametadata.com/geonetwork/datasets/a5df0b0f-90a9-4d46-8ede-38d6802c2eae_resource">
+        <dct:identifier>a5df0b0f-90a9-4d46-8ede-38d6802c2eae_resource</dct:identifier>
+        <dct:title>Swirrl PMD Test record 2: OGL/Non-Spatial Data</dct:title>
+        <dct:description>This is a test record for Swirrl PublishMyData integration Attribution Statement: © Environment Agency copyright and/or database right 2015. All rights reserved. Lineage:  </dct:description>
+            <dct:license rdf:resource="http://reference.data.gov.uk/id/open-government-licence">Open Government Licence</dct:license>
+        <dcat:keyword>OpenData</dcat:keyword>
+        <dcat:theme rdf:resource="https://dsp-test.eametadata.com/geonetwork/registries/vocabularies/isoTopicCategory/concepts/environment"/>
+        <dct:spatial>
+            <ogc:Polygon xmlns:ogc="http://www.opengis.net/rdf#">
+                <ogc:asWKT rdf:datatype="http://www.opengis.net/rdf#WKTLiteral">
+                &lt;http://www.opengis.net/def/crs/OGC/1.3/CRS84&gt;
+                Polygon((-6.236 49.943, -6.236 55.816, 2.072 55.816, 2.072 49.943, -6.236 49.943))
+            </ogc:asWKT>
+            </ogc:Polygon>
+        </dct:spatial>
+        <dct:temporal>
+            /
+            </dct:temporal>
+        <dct:issued>2000-01-01</dct:issued>
+        <dct:updated>2020-10-12</dct:updated>
+        <dct:publisher>
+            <foaf:Organization rdf:about="http://orgs.vocab.org/some-org">
+                <foaf:name>Department for Environment Food and Rural Affairs</foaf:name>
+                <foaf:Agent>
+                    <foaf:mbox>open@defra.gov.uk</foaf:mbox>
+                </foaf:Agent>
+            </foaf:Organization>
+        </dct:publisher>
+        <dct:accrualPeriodicity/>
+        <dct:language>eng</dct:language>
+        <dcat:dataQuality/>
+        <dcat:distribution>
+            <dcat:Distribution rdf:about="http://www">
+                <dcat:accessURL>http://www</dcat:accessURL>
+                <dct:rights>Open Government Licence</dct:rights>
+                <dct:license rdf:resource="http://reference.data.gov.uk/id/open-government-licence"/>
+            </dcat:Distribution>
+        </dcat:distribution>
+        <dcat:distribution>
+            <dcat:Distribution rdf:about="https://support.environment.data.gov.uk/hc/en-gb">
+                <dcat:accessURL>https://support.environment.data.gov.uk/hc/en-gb</dcat:accessURL>
+                <dct:title>DSP_CUSTOMER_FORUM</dct:title>
+                <dct:format>
+                    <dct:IMT>
+                    <rdf:value>http:</rdf:value>
+                    <rdfs:label>http:</rdfs:label>
+                    </dct:IMT>
+                </dct:format>
+                <dct:rights>Open Government Licence</dct:rights>
+                <dct:license rdf:resource="http://reference.data.gov.uk/id/open-government-licence"></dct:license>
+            </dcat:Distribution>
+        </dcat:distribution>
+    </dcat:Dataset>
+</rdf:RDF>

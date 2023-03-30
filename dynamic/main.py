@@ -1,11 +1,10 @@
-import os
 import time
 from flask import request, Flask, Response
 
 app = Flask(__name__)
 DELAY_TAG = 'delay-'
 NUM_LINKS_TAG = 'num_links-'
-NUM_DIGITS=3
+NUM_DIGITS = 3
 
 
 @app.route('/', defaults={'path': '0'})
@@ -34,20 +33,21 @@ def catch_all(path):
     path_split = path.split('/')
     url_index = path_split[0] if '/' in path else path if len(path) else '0'
 
+    delay = 1
+
+    if len(path_split) > 2 and path_split[1].startswith(DELAY_TAG):
+        delay = int(path_split[1][len(DELAY_TAG):])
+
     if path.endswith('.tmp.xml'):
         filename_base = path_split[-1]
         filename_parts = filename_base.split('.')
-        delay = 1
-
-        if len(path_split) > 2 and path_split[2].startswith(DELAY_TAG):
-            delay = int(path_split[2][len(DELAY_TAG):])
 
         filename = '.'.join([filename_parts[-4], filename_parts[-2], filename_parts[-1]])
         _id = filename_parts[-3].zfill(NUM_DIGITS)
 
         with open(filename, 'rb') as f:
             content = f.read().decode('utf-8')
-            content = content.replace('{{url-index}}', url_index.zfill(NUM_DIGITS))
+            content = content.replace('{{url-index}}', url_index.zfill(2))
             content = content.replace('{{end-guid}}', _id)
 
             # delay to simulate slow servers
@@ -62,19 +62,22 @@ def catch_all(path):
             else:
                 return resp
     else:
-        delay = 1
         num_links = 10
         if path_split[1].startswith(NUM_LINKS_TAG):
             num_links = int(path_split[1][len(NUM_LINKS_TAG):])
 
-        num_links = num_links if num_links < 1000 else 999
+        num_links = num_links if num_links < 100 else 99
         links = ''
         for index in range(1, 1 + num_links):
             links += f'<div><a href="test.{index}.tmp.xml">Harvest source {index}</a></div>'
         content = f'<html><body>{url_index}{links}</body></html>'
 
+        # delay to simulate slow servers
+        if delay > 0:
+            time.sleep(delay)
+
         return content
 
 
 if __name__ == "__main__":
-    app.run(debug='DEBUG' in os.environ, host='0.0.0.0', port=int(os.getenv("PORT", 8001)))
+    app.run(debug=True, port=8001)

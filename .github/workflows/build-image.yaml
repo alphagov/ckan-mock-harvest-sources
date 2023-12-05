@@ -32,29 +32,14 @@ jobs:
           ref: ${{ inputs.gitRef }}
       - name: Build dynamic
         if: ${{ inputs.buildType == 'build_only' }}
-        uses: docker/build-push-action@v5
-        with:
-          context: ./dynamic
-          push: false
-          tags: alphagov/dynamic-ckan-harvest-source:1.0.0
-      - name: Build static
-        if: ${{ inputs.buildType == 'build_only' }}
-        uses: docker/build-push-action@v5
-        with:
-          context: ./static
-          push: false
-          tags: alphagov/static-ckan-harvest-source:1.0.0
-      - name: Build and push dynamic
+        env:
+          DRY_RUN: "1"
+          APP: ckan-harvest-source
+          ARCH: amd64
+        run: ./.github/workflows/build-image.sh
+      - name: Build and push images
         if: ${{ inputs.buildType == 'build_push' || github.ref == 'refs/heads/main' }}
-        uses: docker/build-push-action@v5
-        with:
-          context: ./dynamic
-          push: true
-          tags: alphagov/dynamic-ckan-harvest-source:1.0.0
-      - name: Build and push static
-        if: ${{ inputs.buildType == 'build_push' || github.ref == 'refs/heads/main' }}
-        uses: docker/build-push-action@v5
-        with:
-          context: ./static
-          push: true
-          tags: alphagov/static-ckan-harvest-source:1.0.0
+        env:
+          APP: ckan-harvest-source
+          ARCH: amd64
+        run: ./.github/workflows/build-image.sh

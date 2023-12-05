@@ -1,0 +1,54 @@
+{
+    "@context": "https://project-open-data.cio.gov/v1.1/schema/catalog.jsonld",
+    "@id": "https://open.barnet.gov.uk/data.json?masthead=london-borough-of-barnet",
+    "@type": "dcat:Catalog",
+    "conformsTo": "https://project-open-data.cio.gov/v1.1/schema",
+    "describedBy": "https://project-open-data.cio.gov/v1.1/schema/catalog.json",
+    "dataset": [
+        {
+            "title": "Brownfield Land Register",
+            "theme": [
+                "Environment, Property & Land"
+            ],
+            "publisher": {
+                "@type": "org:Organization",
+                "name": "London Borough of Barnet"
+            },
+            "issued": "2017-12-19T09:51:17.000Z",
+            "modified": "2021-01-05T09:42:56.000Z",
+            "landingPage": "https://open.barnet.gov.uk/dataset/249xe/brownfield-land-register",
+            "license": "https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
+            "distribution": [
+                {
+                    "@type": "dcat:Distribution",
+                    "downloadURL": "https://open.barnet.gov.uk/download/249xe/2gv/Brownfield%20Land%20Register%202020%20-%20Barnet.csv",
+                    "title": "Brownfield Land Register - Barnet.csv",
+                    "description": ""
+                },
+                {
+                    "@type": "dcat:Distribution",
+                    "downloadURL": "https://open.barnet.gov.uk/download/249xe/dlr/Brownfield-Land-Register.xml",
+                    "title": "Brownfield Land Register metadata file",
+                    "description": ""
+                }
+            ],
+            "description": "This is a dataset of the London Borough of Barnet's Brownfield Land Register, as referenced in the Housing and Planning Act 2016.  Part 1 lists brownfield land sites of at least 0.25ha or capable of providing 5 or more dwellings that are considered suitable for housing led development. Sites listed in Part 2 of the register will have been granted Permission in Principle. Local Planning Authorities are required to review registers at least once a year.\r\nFurther information from the DCLG on Brownfield Land Registers is provided here\r\nThis dataset has been published by the London Borough of Barnet under the Open Government Licence (OGL) (v3).\r\nPlease acknowledge the Information Provider through the following attribution statement:\r\n© London Borough of Barnet, 2017, OGL, v3.0\r\nContains OS data © Crown copyright and database right, 2017",
+            "accessLevel": "public",
+            "@type": "dcat:Dataset",
+            "contactPoint": {
+                "@type": "vcard:Contact",
+                "fn": "<Nobody>"
+            },
+            "identifier": "249xe",
+            "keyword": [
+                "Brownfield",
+                "Development",
+                "Housing",
+                "Land",
+                "Permission in Prin",
+                "Register",
+                "Sites"
+            ]
+        }
+    ]
+}

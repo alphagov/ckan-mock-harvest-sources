@@ -1,0 +1,60 @@
+name: Build and push images
+
+on:
+  workflow_dispatch:
+    inputs:
+      buildType:
+        description: Decide on what to build
+        required: true
+        type: choice
+        options:
+          - build_push
+          - build_only
+  push:
+    branches:
+      - main
+
+jobs:
+  build_and_push:
+    name: ${{ matrix.app.name }} (${{ matrix.arch }})
+    runs-on: ubuntu-latest
+    permissions:
+      packages: write
+    steps:
+      - name: Login to GHCR
+        uses: docker/login-action@f4ef78c080cd8ba55a85445d5b36e214a81df20a  # v2.1.0
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.gitRef }}
+      - name: Build dynamic
+        if: ${{ inputs.buildType == 'build_only' }}
+        uses: docker/build-push-action@v5
+        with:
+          context: ./dynamic
+          push: false
+          tags: alphagov/dynamic-ckan-harvest-source:1.0.0
+      - name: Build static
+        if: ${{ inputs.buildType == 'build_only' }}
+        uses: docker/build-push-action@v5
+        with:
+          context: ./static
+          push: false
+          tags: alphagov/static-ckan-harvest-source:1.0.0
+      - name: Build and push dynamic
+        if: ${{ inputs.buildType == 'build_push' || github.ref == 'refs/heads/main' }}
+        uses: docker/build-push-action@v5
+        with:
+          context: ./dynamic
+          push: true
+          tags: alphagov/dynamic-ckan-harvest-source:1.0.0
+      - name: Build and push static
+        if: ${{ inputs.buildType == 'build_push' || github.ref == 'refs/heads/main' }}
+        uses: docker/build-push-action@v5
+        with:
+          context: ./static
+          push: true
+          tags: alphagov/static-ckan-harvest-source:1.0.0

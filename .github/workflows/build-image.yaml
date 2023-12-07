@@ -16,7 +16,7 @@ on:
 
 jobs:
   build_and_push:
-    name: ${{ matrix.app.name }} (${{ matrix.arch }})
+    name: Build and push dyanmic and static harvest source images
     runs-on: ubuntu-latest
     permissions:
       packages: write

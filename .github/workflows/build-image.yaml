@@ -16,7 +16,7 @@ on:
 
 jobs:
   build_and_push:
-    name: ${{ matrix.app.name }} (${{ matrix.arch }})
+    name: Build and push dyanmic and static harvest source images
     runs-on: ubuntu-latest
     permissions:
       packages: write
@@ -36,25 +36,25 @@ jobs:
         with:
           context: ./dynamic
           push: false
-          tags: alphagov/dynamic-ckan-harvest-source:1.0.0
+          tags: ghcr.io/alphagov/dynamic-ckan-harvest-source:1.0.0
       - name: Build static
         if: ${{ inputs.buildType == 'build_only' }}
         uses: docker/build-push-action@v5
         with:
           context: ./static
           push: false
-          tags: alphagov/static-ckan-harvest-source:1.0.0
+          tags: ghcr.io/alphagov/static-ckan-harvest-source:1.0.0
       - name: Build and push dynamic
         if: ${{ inputs.buildType == 'build_push' || github.ref == 'refs/heads/main' }}
         uses: docker/build-push-action@v5
         with:
           context: ./dynamic
           push: true
-          tags: alphagov/dynamic-ckan-harvest-source:1.0.0
+          tags: ghcr.io/alphagov/dynamic-ckan-harvest-source:1.0.0
       - name: Build and push static
         if: ${{ inputs.buildType == 'build_push' || github.ref == 'refs/heads/main' }}
         uses: docker/build-push-action@v5
         with:
           context: ./static
           push: true
-          tags: alphagov/static-ckan-harvest-source:1.0.0
+          tags: ghcr.io/alphagov/static-ckan-harvest-source:1.0.0

@@ -43,25 +43,25 @@ jobs:
         with:
           context: ./dynamic
           push: false
-          tags: ghcr.io/alphagov/dynamic-ckan-harvest-source:${{ tag }}
+          tags: ghcr.io/alphagov/dynamic-ckan-harvest-source:$tag
       - name: Build static
         if: ${{ inputs.buildType == 'build_only' }}
         uses: docker/build-push-action@v6
         with:
           context: ./static
           push: false
-          tags: ghcr.io/alphagov/static-ckan-harvest-source:${{ tag }}
+          tags: ghcr.io/alphagov/static-ckan-harvest-source:$tag
       - name: Build and push dynamic
         if: ${{ inputs.buildType == 'build_push' || github.ref == 'refs/heads/main' }}
         uses: docker/build-push-action@v6
         with:
           context: ./dynamic
           push: true
-          tags: ghcr.io/alphagov/dynamic-ckan-harvest-source:${{ tag }}
+          tags: ghcr.io/alphagov/dynamic-ckan-harvest-source:$tag
       - name: Build and push static
         if: ${{ inputs.buildType == 'build_push' || github.ref == 'refs/heads/main' }}
         uses: docker/build-push-action@v6
         with:
           context: ./static
           push: true
-          tags: ghcr.io/alphagov/static-ckan-harvest-source:${{ tag }}
+          tags: ghcr.io/alphagov/static-ckan-harvest-source:$tag

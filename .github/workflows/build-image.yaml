@@ -10,19 +10,26 @@ on:
         options:
           - build_push
           - build_only
+      tag:
+        description: Tag to build the image with
+        required: true
+        type: string
+        default: latest
   push:
     branches:
       - main
 
 jobs:
   build_and_push:
-    name: Build and push dyanmic and static harvest source images
+    name: Build and push dynamic and static harvest source images
     runs-on: ubuntu-latest
     permissions:
       packages: write
+    env:
+      tag: ${{ inputs.tag || 'latest' }}
     steps:
       - name: Login to GHCR
-        uses: docker/login-action@f4ef78c080cd8ba55a85445d5b36e214a81df20a  # v2.1.0
+        uses: docker/login-action@v3
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
@@ -32,29 +39,29 @@ jobs:
           ref: ${{ inputs.gitRef }}
       - name: Build dynamic
         if: ${{ inputs.buildType == 'build_only' }}
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@v6
         with:
           context: ./dynamic
           push: false
-          tags: ghcr.io/alphagov/dynamic-ckan-harvest-source:1.0.0
+          tags: ghcr.io/alphagov/dynamic-ckan-harvest-source:${{ tag }}
       - name: Build static
         if: ${{ inputs.buildType == 'build_only' }}
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@v6
         with:
           context: ./static
           push: false
-          tags: ghcr.io/alphagov/static-ckan-harvest-source:1.0.0
+          tags: ghcr.io/alphagov/static-ckan-harvest-source:${{ tag }}
       - name: Build and push dynamic
         if: ${{ inputs.buildType == 'build_push' || github.ref == 'refs/heads/main' }}
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@v6
         with:
           context: ./dynamic
           push: true
-          tags: ghcr.io/alphagov/dynamic-ckan-harvest-source:1.0.0
+          tags: ghcr.io/alphagov/dynamic-ckan-harvest-source:${{ tag }}
       - name: Build and push static
         if: ${{ inputs.buildType == 'build_push' || github.ref == 'refs/heads/main' }}
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@v6
         with:
           context: ./static
           push: true
-          tags: ghcr.io/alphagov/static-ckan-harvest-source:1.0.0
+          tags: ghcr.io/alphagov/static-ckan-harvest-source:${{ tag }}

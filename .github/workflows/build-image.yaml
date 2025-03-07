@@ -10,6 +10,10 @@ on:
         options:
           - build_push
           - build_only
+      gitRef:
+        description: Commit, tag or branch name to build
+        required: false
+        type: string
       tag:
         description: Tag to build the image with
         required: true
@@ -36,7 +40,8 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
       - uses: actions/checkout@v4
         with:
-          ref: ${{ inputs.gitRef }}
+          ref: ${{ inputs.gitRef || github.ref }}
+          show-progress: false
       - name: Build dynamic
         if: ${{ inputs.buildType == 'build_only' }}
         uses: docker/build-push-action@v6

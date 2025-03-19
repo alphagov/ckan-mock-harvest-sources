@@ -26,7 +26,7 @@ on:
 jobs:
   build_and_push:
     name: Build and push dynamic and static harvest source images
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04-arm
     permissions:
       packages: write
     env:
@@ -42,11 +42,14 @@ jobs:
         with:
           ref: ${{ inputs.gitRef || github.ref }}
           show-progress: false
+      - name: Setup Docker BuildX
+        uses: docker/setup-buildx-action@v3
       - name: Build dynamic
         if: ${{ inputs.buildType == 'build_only' }}
         uses: docker/build-push-action@v6
         with:
           context: ./dynamic
+          platforms: linux/arm64
           push: false
           tags: ghcr.io/alphagov/dynamic-ckan-harvest-source:${{ env.tag }}
       - name: Build static
@@ -54,6 +57,7 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           context: ./static
+          platforms: linux/arm64
           push: false
           tags: ghcr.io/alphagov/static-ckan-harvest-source:${{ env.tag }}
       - name: Build and push dynamic
@@ -61,6 +65,7 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           context: ./dynamic
+          platforms: linux/arm64
           push: true
           tags: ghcr.io/alphagov/dynamic-ckan-harvest-source:${{ env.tag }}
       - name: Build and push static
@@ -68,5 +73,6 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           context: ./static
+          platforms: linux/arm64
           push: true
           tags: ghcr.io/alphagov/static-ckan-harvest-source:${{ env.tag }}
